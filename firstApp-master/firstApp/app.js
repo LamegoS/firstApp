@@ -19,7 +19,7 @@ app.get('/user', (req, res) => {
   });
 
   app.post('/post', (req, res) => {
-    return res.send('Opinión publicada');
+    return res.send('Comentario publicado');
   });
 
   app.put('/post', (req, res) => {
