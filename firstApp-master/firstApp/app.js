@@ -12,7 +12,7 @@ const sequelize = new Sequelize('sqlite::memory:') // Example for sqlite
 //New example
 //Andy: es esto un branch?
 //Luis
-//segundo commit
+//segundo commit_2
 
 app.get('/',(req,res) => {
     res.send('Hello World!');
