@@ -6,9 +6,6 @@ const { Sequelize } = require('sequelize');
 
 const sequelize = new Sequelize('sqlite::memory:') // Example for sqlite
 
-//Julio: Testing commit
-//Second commit
-
 app.get('/',(req,res) => {
     res.send('Hello World!');
 })
