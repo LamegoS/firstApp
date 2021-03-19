@@ -9,7 +9,7 @@ const sequelize = new Sequelize('sqlite::memory:') // Example for sqlite
 //Julio: Testing commit
 //Second commit
 
-const { auth } = require('express-openid-connect');
+const { auth, requiresAuth } = require('express-openid-connect');
 app.use(
   auth({
     authRequired: false,
@@ -24,6 +24,10 @@ app.use(
 app.get('/', (req, res) => {
     res.send(req.oidc.isAuthenticated() ? 'logged in' : 'logged out');
 });
+
+app.get('/profile', requiresAuth(), (req, res) => {
+  res.send(JSON.stringify(req.oidc.user))
+  })
 
 const port = process.env.PORT || 3000;
 app.listen(port,() => {
