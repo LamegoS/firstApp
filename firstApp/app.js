@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+require('dotenv').config();
 
 const { Sequelize } = require('sequelize');
 
@@ -8,6 +8,21 @@ const sequelize = new Sequelize('sqlite::memory:') // Example for sqlite
 
 //Julio: Testing commit
 //Second commit
+
+const { auth } = require('express-openid-connect');
+app.use(
+  auth({
+    issuerBaseURL: process.env.ISSUER_BASE_URL,
+    baseURL: process.env.BASE_URL,
+    clientID: process.env.CLIENT_ID,
+    secret: process.env.SECRET,
+  })
+);
+
+const port = process.env.PORT || 3000;
+app.listen(port,() => {
+  console.log(`Example app at http://localhost:${port}`);
+});
 
 app.get('/',(req,res) => {
     res.send('Hello World!');
@@ -29,6 +44,3 @@ app.get('/user', (req, res) => {
     return res.send('Post eliminado');
   });
 
-app.listen(port,() => {
-    console.log(`Example app at http://localhost:${port}`)
-})
